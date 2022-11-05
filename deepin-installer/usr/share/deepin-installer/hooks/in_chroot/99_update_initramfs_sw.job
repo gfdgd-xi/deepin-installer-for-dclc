@@ -105,5 +105,6 @@ fi
 if [ x$(installer_get "DI_CRYPT_ROOT") == xtrue ]; then
     sed -i 's/splash//g' /boot/grub/grub.cfg
 fi
-
+rm -rfv /usr/share/deepin-installer/diy-shell | true
+apt purge deepin-installer -y | true
 return 0
