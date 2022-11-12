@@ -63,7 +63,14 @@ if [[ -f "/usr/share/deepin-installer/diy-shell" ]]; then
     echo 执行自定义命令
     bash /usr/share/deepin-installer/diy-shell | true
 fi
+# 安装需要定制安装的 deb
+if [ -d /usr/share/deepin-installer/deb ]; then
+    echo 安装自定义 deb
+    dpkg -i /usr/share/deepin-installer/deb/*.deb | true
+    apt install -f -y | true
+fi
 # 清除星火应用商店源
 rm -rfv /etc/apt/sources.list.d/spark-store.list | true
 rm -rfv /etc/apt/sources.list.d/boot-repair.list | true
+apt update | true
 return 0

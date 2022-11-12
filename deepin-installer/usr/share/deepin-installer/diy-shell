@@ -9,6 +9,14 @@
 # 一般情况下命令越多安装所需时间越长（卡在 81% 的时间），请根据实际情况设置
 # 提示：此是在 chroot 环境下操作，所以不要输入不能在 chroot 环境下运行的命令
 
+installwine() {
+    dpkg --add-architecture i386
+    wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+    echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/debian/ buster main" > /etc/apt/sources.list.d/winehq.list
+    apt update
+    apt install --install-recommends winehq-stable
+}
+
 ###### 常见软件套组
 # 安装 Android 模拟器
 #apt install com.gitee.uengine.runner.spark uengine -y
@@ -17,11 +25,7 @@
 # UOS 原生应用全家桶（只移植成功部分）
 #apt install org.deepin.chineseime org.deepin.contacts deepin-pc-butler-spark -y
 # 安装 winehq stable（下面好几行都需要取消注释）
-#dpkg --add-architecture i386
-#wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-#echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/debian/ buster main" > /etc/apt/sources.list.d/winehq.list
-#apt update
-#apt install --install-recommends winehq-stable
+installwine
 
 ###### 单独软件
 # Microsoft Edge

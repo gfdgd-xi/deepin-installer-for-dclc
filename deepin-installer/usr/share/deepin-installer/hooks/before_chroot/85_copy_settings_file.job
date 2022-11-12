@@ -23,6 +23,21 @@ if [ -f "${CONF_FILE}" ]; then
     warn_exit "Failed to copy ${CONF_FILE}"
 fi
 if [ -f "/usr/share/deepin-installer/diy-shell" ]; then
+  # 优先考虑定制文件
   cp -rv /usr/share/deepin-installer/diy-shell /target/usr/share/deepin-installer/diy-shell
+else
+  # 考虑镜像内的内置脚本
+  if [ -f $CDROM/DIY/shell.sh ]; then
+    cp -rv $CDROM/DIY/shell.sh /target/usr/share/deepin-installer/diy-shell
+  fi
+fi
+# 拷贝需要定制安装的 deb
+if [ -d /usr/share/deepin-installer/deb ]; then
+  mkdir -p /target/usr/share/deepin-installer/deb
+  cp -rv /usr/share/deepin-installer/deb/* /target/usr/share/deepin-installer/deb
+fi
+if [ -d $CDROM/DIY/DEB ]; then
+  mkdir -p /target/usr/share/deepin-installer/deb
+  cp -rv $CDROM/DIY/DEB/* /target/usr/share/deepin-installer/deb
 fi
 return 0
