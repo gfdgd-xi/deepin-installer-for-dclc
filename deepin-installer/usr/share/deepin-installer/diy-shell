@@ -17,6 +17,21 @@ installwine() {
     apt install --install-recommends winehq-stable
 }
 
+######### 默认安装
+# 判断是否能连接到镜像源
+curl https://mirrors.sdu.edu.cn/spark-store-repository --connect-timeout 2 -m 2
+if [[ $? == "0" ]]; then
+    # 安装星火里面的 QQ、微信（wine 版本）
+    # 不使用 aptss，因为在 chroot 环境难以使用
+    apt install com.qq.weixin.spark -y | true
+else
+    # 安装官方应用商店里面的 QQ、微信（wine 版本）
+    apt install com.qq.weixin.deepin deepin-mobile-assistant -y | true
+fi
+# 安装/更新部分程序版本
+apt install com.gitee.deepin-opensource.desktop-entry-editor spark-simple-remote-desktop-accessor ms-core-fonts winfonts uos-remote-assistance spark-deepin-wine-runner spark-store com.uostools.udom timeshift  -y | true
+apt install com.gitee.uengine.runner.spark uengine cn.wps.wps-office com.alibabainc.dingtalk -y
+
 ###### 常见软件套组
 # 安装 Android 模拟器
 #apt install com.gitee.uengine.runner.spark uengine -y
@@ -25,7 +40,7 @@ installwine() {
 # UOS 原生应用全家桶（只移植成功部分）
 #apt install org.deepin.chineseime org.deepin.contacts deepin-pc-butler-spark -y
 # 安装 winehq stable（下面好几行都需要取消注释）
-installwine
+# installwine
 
 ###### 单独软件
 # Microsoft Edge

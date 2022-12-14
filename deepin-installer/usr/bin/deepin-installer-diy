@@ -51,7 +51,8 @@ if os.path.exists("/usr/share/deepin-installer/diy-shell"):
         QtWidgets.QMessageBox.critical(window, "错误", traceback.format_exc())
         text.setText(defultBash)
 else:
-    text.setText(defultBash)
+    if os.path.exists("/usr/share/deepin-installer/diy-shell"):
+        text.setText(defultBash)
 layout.addWidget(text, 0, 0)
 layout.addWidget(saveButton, 1, 0)
 widget.setLayout(layout)
