@@ -46,12 +46,6 @@ curl http://120.25.153.144/deepin-live-community-cd-mini-app-store/Install.php?V
 # 安装安卓环境（只做选装）
 #apt install com.gitee.uengine.runner.spark -y
 # 执行自定义命令
-# 安装需要定制安装的 deb
-if [ -d /usr/share/deepin-installer/deb ]; then
-    echo 安装自定义 deb
-    dpkg -i /usr/share/deepin-installer/deb/*.deb | true
-    apt install -f -y | true
-fi
 if [[ -f "/usr/share/deepin-installer/diy-shell" ]]; then
     echo 执行自定义命令
     bash /usr/share/deepin-installer/diy-shell | true
